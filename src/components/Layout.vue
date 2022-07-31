@@ -13,7 +13,14 @@ export default {
 
 <style lang="scss" scoped>
 .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  height: 4rem;
 }
 .bottom {
+  position: relative;
+  height: calc(100% - 4rem);
 }
 </style>
