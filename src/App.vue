@@ -4,7 +4,7 @@
       <template #top><h1 class="title">Добавление товара</h1></template>
       <template #bottom>
         <ProductForm @submit="addProduct" />
-        <!-- products -->
+        <Products :products="products"/>
 
       </template>
     </Layout>
@@ -14,12 +14,13 @@
 <script>
 import Layout from './components/Layout.vue';
 import ProductForm from './components/ProductForm.vue';
+import Products from './components/Products.vue';
 import { ref, computed, reactive } from 'vue';
 const IMGAE_URL =
   'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80';
-const genericItem = () => ({
+const genericItem = (idx) => ({
   id: 'item:' + Math.floor(Math.random() * 100),
-  name: 'Наименование товара ' + Math.floor(Math.random() * 100),
+  name: 'Наименование товара ' + (idx + 1),
   desc: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
   image: IMGAE_URL,
   price: '10 000',
@@ -28,10 +29,10 @@ export default {
   name: 'App',
   components: {
     Layout,
-    ProductForm,
+    ProductForm,Products
   },
   setup() {
-    const products = ref(Array.from({ length: 10 }, (_, idx) => genericItem()));
+    const products = ref(Array.from({ length: 10 }, (_, idx) => genericItem(idx)));
     // const filteredProducts = computed(()=> prdocuts);
 
     const addProduct = (data) => {
