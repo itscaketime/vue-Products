@@ -18,7 +18,7 @@
       <p class="product-desc">{{ product.desc }}</p>
       <div class="product-value">{{ product.price }} <span>руб.</span></div>
     </div>
-    <button v-show="isHover" class="btn del-product-btn" @click=""></button>
+    <button v-show="isHover" class="btn del-product-btn" @click="$emit('remove-product')"></button>
   </article>
 </template>
 
@@ -31,7 +31,6 @@ export default {
   components: {},
   setup(props, { emit }) {
     const isHover = ref(false);
-    console.log(props);
     return {
       isHover,
     };

@@ -4,7 +4,7 @@
       v-for="product in products"
       :key="product.id"
       :product="product"
-      @remove-product=""
+      @remove-product="$emit('remove-product',product.id)"
     />
   </div>
 </template>
@@ -15,7 +15,7 @@ import { ref } from 'vue';
 export default {
   name: 'Products',
   props: ['products'],
-  emits:['remove-product']
+  emits:['remove-product'],
   components: {
     ProductCard,
   },

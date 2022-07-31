@@ -4,8 +4,7 @@
       <template #top><h1 class="title">Добавление товара</h1></template>
       <template #bottom>
         <ProductForm @submit="addProduct" />
-        <Products :products="products"/>
-
+        <Products :products="products" @remove-product="removeProduct" />
       </template>
     </Layout>
   </div>
@@ -29,20 +28,27 @@ export default {
   name: 'App',
   components: {
     Layout,
-    ProductForm,Products
+    ProductForm,
+    Products,
   },
   setup() {
-    const products = ref(Array.from({ length: 10 }, (_, idx) => genericItem(idx)));
+    const products = ref(
+      Array.from({ length: 10 }, (_, idx) => genericItem(idx))
+    );
     // const filteredProducts = computed(()=> prdocuts);
 
     const addProduct = (data) => {
       // console.log(data);
       products.value.push(data);
     };
-    const removeProduct = (data) => {};
+    const removeProduct = (id) => {
+      console.log('remove', id);
+      products.value = products.value.filter((item) => item.id !== id);
+    };
     return {
       products,
       addProduct,
+      removeProduct,
     };
   },
 };
