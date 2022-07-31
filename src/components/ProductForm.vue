@@ -31,7 +31,8 @@
         ></label
       >
       <input
-        type="text"
+        required
+        type="url"
         id="input-image"
         name="image"
         placeholder="Введите ссылку"
@@ -44,6 +45,7 @@
         type="text"
         id="input-value"
         name="value"
+        required
         placeholder="Введите цену"
         v-model="productPrice"
       />
@@ -66,9 +68,13 @@ export default {
     const productPrice = ref('');
 
     const productNameValidated = useValidation(
-      /[A-Za-zЁёА-я0-9]/mu,
+      /[A-Za-zЁёА-я0-9]+/mu,
       productName
     );
+    const productPriceValidated = useValidation(/^[0-9]+$/m, productPrice);
+
+    const validateForm = () => {};
+
     const onFormSubmit = (ev) => {
       console.log('form submit');
       let item = ctx.emit('submit', {
@@ -79,6 +85,7 @@ export default {
         price: productPrice.value,
       });
     };
+
     return {
       productName,
       productDesc,

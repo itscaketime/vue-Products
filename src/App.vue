@@ -32,6 +32,7 @@ export default {
     Products,
   },
   setup() {
+    const filter = ref('');
     const products = ref(
       Array.from({ length: 10 }, (_, idx) => genericItem(idx))
     );
@@ -54,7 +55,6 @@ export default {
 };
 </script>
 
-<!-- <style lang="scss"></style> -->
 <style lang="scss" scoped>
 @import 'assets/_base.scss';
 
