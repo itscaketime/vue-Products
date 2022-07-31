@@ -57,7 +57,8 @@ import { ref } from 'vue';
 export default {
   name: 'ProductForm',
   components: {},
-  setup() {
+  emits: ['submit'],
+  setup(props, ctx) {
     const productName = ref('');
     const productDesc = ref('');
     const productImage = ref('');
@@ -65,6 +66,13 @@ export default {
 
     const onFormSubmit = (ev) => {
       console.log('form submit');
+      let item = ctx.emit('submit', {
+        id: 'item:' + Math.random() * 100,
+        name: productName.value,
+        desc: productDesc.value,
+        image: productImage.value,
+        price: productPrice.value,
+      });
     };
     return {
       productName,
