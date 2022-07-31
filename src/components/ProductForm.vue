@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import useValidation from '../use/useValidation';
 import { ref } from 'vue';
 export default {
   name: 'ProductForm',
@@ -64,6 +65,10 @@ export default {
     const productImage = ref('');
     const productPrice = ref('');
 
+    const productNameValidated = useValidation(
+      /[A-Za-zЁёА-я0-9]/mu,
+      productName
+    );
     const onFormSubmit = (ev) => {
       console.log('form submit');
       let item = ctx.emit('submit', {
@@ -80,6 +85,7 @@ export default {
       productImage,
       productPrice,
       onFormSubmit,
+      productNameValidated,
     };
   },
 };
