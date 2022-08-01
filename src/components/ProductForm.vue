@@ -94,7 +94,7 @@ export default {
         !imageErr.value,
         productPriceValidated.value,
         !priceErr.value
-      )
+      );
       return (
         productNameValidated.value &&
         !nameErr.value &&
