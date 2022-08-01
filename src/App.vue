@@ -48,12 +48,12 @@ export default {
       products.value.sort((a, b) => {
         switch (filter.value) {
           case '':
-            return a.id > b.id ? 1 : 0;
+            return a.id.toString().localeCompare(b.id.toString());
           case 'name':
             return a.name.localeCompare(b.name);
           case 'price':
-            return a.price < b.price ? 1 : 0
-            // return a.price.localeCompare(b.price);
+            return a.price < b.price ? 1 : -1;
+          // return a.price.localeCompare(b.price);
           default:
             return 0;
         }
