@@ -1,3 +1,4 @@
+@import './_vars.scss';
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +18,8 @@ html {
   }
 }
 body {
-  color: #3f3f3f;
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  color: $text-color;
+  font-family: $font;
   padding: 1rem 4rem;
   min-width: 360px;
 }
@@ -35,7 +36,7 @@ p {
 button,
 input[type='submit'],
 .btn {
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-family: $font;
   display: inline-block;
   cursor: pointer;
   appearance: none;
@@ -85,7 +86,7 @@ form {
     font-size: 0.75rem;
   }
   textarea {
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-family: $font;
     resize: none;
     height: 6.5rem;
     border-radius: 0.35rem;
