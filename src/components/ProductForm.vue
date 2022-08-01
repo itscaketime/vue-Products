@@ -5,12 +5,14 @@
         ><span class="required">Наименование товара</span></label
       >
       <input
+        :class="{ 'is-error': nameErr }"
         type="text"
         id="input-text"
         name="text"
         placeholder="Введите наименование товара"
         v-model="productName"
       />
+      <p class="err" v-if="nameErr">Поле не должно быть пустым</p>
     </div>
     <div class="form-field">
       <label for="input-desc">Описание товара</label>
@@ -31,30 +33,36 @@
         ></label
       >
       <input
-        type="url"
+        :class="{ 'is-error': imageErr }"
+        type="text"
         id="input-image"
         name="image"
         placeholder="Введите ссылку"
         v-model="productImage"
       />
+      <p class="err" v-if="imageErr">Поле не должно быть пустым</p>
     </div>
     <div class="form-field">
       <label for="input-value"><span class="required">Цена товара</span></label>
       <input
+        :class="{ 'is-error': priceErr }"
         type="text"
         id="input-value"
         name="value"
         placeholder="Введите цену"
         v-model="productPrice"
       />
+      <p class="err" v-if="priceErr">Поле не должно быть пустым</p>
     </div>
-    <button class="add-btn" type="submit">Добавить товар</button>
+    <button :disabled="!canSubmitForm" class="add-btn" type="submit">
+      Добавить товар
+    </button>
   </form>
 </template>
 
 <script>
 import useValidation from '../use/useValidation';
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue';
 export default {
   name: 'ProductForm',
   components: {},
@@ -65,16 +73,67 @@ export default {
     const productImage = ref('');
     const productPrice = ref('');
 
+    const nameErr = ref(false);
+    const priceErr = ref(false);
+    const imageErr = ref(false);
+
     const productNameValidated = useValidation(
-      /[A-Za-zЁёА-я0-9]+/mu,
+      /^[\sA-Za-zЁёА-я0-9]+$/imu,
       productName
     );
     const productPriceValidated = useValidation(/^[0-9]+$/m, productPrice);
 
-    const validateForm = () => {};
+    const canSubmitForm = computed(() => {
+      return productName.value && productImage.value && productPrice.value;
+    });
 
+    const formSubmittable = () => {
+      console.log(
+        productNameValidated.value,
+        !nameErr.value,
+        !imageErr.value,
+        productPriceValidated.value,
+        !priceErr.value
+      )
+      return (
+        productNameValidated.value &&
+        !nameErr.value &&
+        !imageErr.value &&
+        productPriceValidated.value &&
+        !priceErr.value
+      );
+    };
+
+    //make watcher hook
+    watch(productName, (prevValue, newValue) => {
+      if (!productName.value) {
+        nameErr.value = true;
+      } else {
+        nameErr.value = false;
+      }
+    });
+    watch(productImage, (prevValue, newValue) => {
+      if (!productImage.value) {
+        imageErr.value = true;
+      } else {
+        imageErr.value = false;
+      }
+    });
+    watch(productPrice, (prevValue, newValue) => {
+      console.log(productPriceValidated.value);
+      if (!productPrice.value) {
+        priceErr.value = true;
+      } else {
+        priceErr.value = false;
+      }
+    });
     const onFormSubmit = (ev) => {
-      console.log('form submit');
+      if (!formSubmittable()) {
+        console.log('Form cannot be submited');
+        //show some validation errs
+        return;
+      }
+
       let item = ctx.emit('submit', {
         id: 'item:' + Math.random() * 100,
         name: productName.value,
@@ -91,12 +150,18 @@ export default {
       productPrice,
       onFormSubmit,
       productNameValidated,
+      productNameValidated,
+      nameErr,
+      priceErr,
+      imageErr,
+      canSubmitForm,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/_vars.scss';
 #product-form {
   background-color: white;
   z-index: 1000;
@@ -110,6 +175,7 @@ export default {
     0px 6px 10px rgba(0, 0, 0, 0.02);
   .form-field {
     margin-bottom: 1rem;
+    position: relative;
     &:nth-child(4) {
       margin-bottom: 1.5rem;
     }
@@ -134,13 +200,27 @@ export default {
     border-radius: 10px;
     height: 2.25rem;
     line-height: 2.25rem;
+    background-color: #7bae73;
+    color: white;
   }
   .add-btn:disabled {
     background-color: #eeeeee;
-    color: #b4b4b4;
+    color: $text-color-light;
   }
+  input.is-error {
+    border: 1px solid $text-color-error;
+  }
+
   .err {
-    color: #ff8484;
+    color: $text-color-error;
+    font-weight: bold;
+    font-size: 0.5rem;
+    line-height: 1rem;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: -1.15rem;
+    z-index: 2;
+    left: 0;
   }
 }
 </style>

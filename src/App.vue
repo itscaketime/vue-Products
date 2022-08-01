@@ -3,7 +3,7 @@
     <Layout>
       <template #top>
         <h1 class="title">Добавление товара</h1>
-        <ProductFilter @change="onFilterChange" />
+        <ProductFilter @change="(filter, ev) => onFilterChange(filter, ev)" />
       </template>
       <template #bottom>
         <ProductForm @submit="addProduct" />
@@ -40,20 +40,21 @@ export default {
     ProductFilter,
   },
   setup() {
-    const filter = ref('');
+    const filter = ref('name');
     const products = ref(
       Array.from({ length: 10 }, (_, idx) => genericItem(idx))
     );
     const filteredProducts = computed(() =>
       products.value.sort((a, b) => {
+        // console.log(filter.value)
         switch (filter.value) {
           case '':
-            return a.id < b.id ? 0 : 1;
+            return a.id < b.id ? 1 : 0;
           case 'name':
-            return a.name.localeCompare(b.name);
+            return b.name.localeCompare(a.name);
           case 'price':
             // return a.price < b.price ? 1 : 0
-            return a.price.localeCompare(b.price);
+            return b.price.localeCompare(a.price);
           default:
             return 0;
         }
@@ -67,6 +68,7 @@ export default {
       products.value = products.value.filter((item) => item.id !== id);
     };
     const onFilterChange = (filterType) => {
+      console.log(filterType);
       filter.value = filterType ?? '';
     };
     return {
@@ -75,6 +77,7 @@ export default {
       removeProduct,
       onFilterChange,
       filteredProducts,
+      filter,
     };
   },
 };
