@@ -7,7 +7,6 @@
 import { ref } from 'vue';
 export default {
   name: 'Layout',
-  setup() {},
 };
 </script>
 

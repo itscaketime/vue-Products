@@ -25,11 +25,11 @@ import { ref, computed, reactive } from 'vue';
 const IMGAE_URL =
   'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80';
 const genericItem = (idx) => ({
-  id: 'item:' + Math.floor(Math.random() * 100),
+  id: 'item:' + idx,
   name: 'Наименование товара ' + (idx + 1),
   desc: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
   image: IMGAE_URL,
-  price: '10 000',
+  price: 10000,
 });
 export default {
   name: 'App',
@@ -46,15 +46,14 @@ export default {
     );
     const filteredProducts = computed(() =>
       products.value.sort((a, b) => {
-        // console.log(filter.value)
         switch (filter.value) {
           case '':
             return a.id > b.id ? 1 : 0;
           case 'name':
             return a.name.localeCompare(b.name);
           case 'price':
-            // return a.price < b.price ? 1 : 0
-            return a.price.localeCompare(b.price);
+            return a.price < b.price ? 1 : 0
+            // return a.price.localeCompare(b.price);
           default:
             return 0;
         }
@@ -68,8 +67,6 @@ export default {
       products.value = products.value.filter((item) => item.id !== id);
     };
     const onFilterChange = (type) => {
-      // console.log(args);
-      // console.log(filterType);
       filter.value = type ?? '';
     };
     return {
@@ -92,5 +89,6 @@ export default {
 .title {
   font-size: 1.75rem;
   white-space: nowrap;
+  margin-right: 1rem;
 }
 </style>

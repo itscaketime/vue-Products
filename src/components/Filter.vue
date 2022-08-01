@@ -27,12 +27,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import '../assets/_vars.scss';
 #products-filter {
-  color: #b4b4b4;
+  color: $text-color-light;
   background-color: #fff;
   height: 2.25rem;
   line-height: 2.25rem;
-  width: 8rem;
+  min-width: 8rem;
+  max-width: 8rem;
   font-size: 0.75rem;
   border-radius: 0.35rem;
   padding: 0 1.25rem 0 1rem;

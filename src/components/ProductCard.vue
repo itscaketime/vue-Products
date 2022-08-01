@@ -16,7 +16,7 @@
     <div class="contents">
       <h2 class="product-title">{{ product.name }}</h2>
       <p class="product-desc">{{ product.desc }}</p>
-      <div class="product-value">{{ product.price }} <span>руб.</span></div>
+      <div class="product-value">{{ formatedPrice }} <span>руб.</span></div>
     </div>
     <button
       v-show="isHover"
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 export default {
   name: 'ProductCard',
   props: ['product'],
@@ -35,8 +35,12 @@ export default {
   components: {},
   setup(props, { emit }) {
     const isHover = ref(false);
+    const formatedPrice = computed(() => {
+      return props.product?.price.toLocaleString().split(',').join(' ');
+    });
     return {
       isHover,
+      formatedPrice,
     };
   },
 };
