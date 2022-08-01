@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="products"> -->
-  <TransitionGroup  class="products" name="list" tag="div">
+  <TransitionGroup class="products" name="list" tag="div">
     <ProductCard
       v-for="product in products"
       :key="product.id"
@@ -33,6 +33,10 @@ export default {
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-5%);
 }
 .products {
   display: grid;
