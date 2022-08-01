@@ -68,7 +68,7 @@ export default {
   }
   .product-desc {
     margin-bottom: 2rem;
-    // min-height:6rem;
+    min-height: 6rem;
   }
   .product-value {
     font-weight: bold;

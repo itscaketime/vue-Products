@@ -14,7 +14,7 @@ html {
   font-size: 12pt;
   @media screen and (max-width: 736px) {
     & {
-      // font-size: 12pt;
+      font-size: 11pt;
     }
   }
 }
@@ -23,6 +23,11 @@ body {
   font-family: $font;
   padding: 1rem 4rem;
   min-width: 360px;
+  @media screen and (max-width: 736px) {
+    & {
+      padding: 1rem 2rem;
+    }
+  }
 }
 a {
   text-decoration: none;
