@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="products"> -->
   <TransitionGroup class="products" name="list" tag="div">
     <ProductCard
       v-for="product in products"
@@ -8,7 +7,6 @@
       @remove-product="$emit('remove-product', product.id)"
     />
   </TransitionGroup>
-  <!-- </div> -->
 </template>
 
 <script>
