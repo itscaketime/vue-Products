@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <Layout>
-      <template #top><h1 class="title">Добавление товара</h1></template>
+      <template #top>
+        <h1 class="title">Добавление товара</h1>
+        <ProductFilter />
+      </template>
       <template #bottom>
         <ProductForm @submit="addProduct" />
         <Products :products="products" @remove-product="removeProduct" />
@@ -11,6 +14,7 @@
 </template>
 
 <script>
+import ProductFilter from './components/Filter.vue';
 import Layout from './components/Layout.vue';
 import ProductForm from './components/ProductForm.vue';
 import Products from './components/Products.vue';
@@ -30,6 +34,7 @@ export default {
     Layout,
     ProductForm,
     Products,
+    ProductFilter,
   },
   setup() {
     const filter = ref('');

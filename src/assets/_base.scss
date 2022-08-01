@@ -47,16 +47,6 @@ input[type='submit'],
   border-radius: 0.35rem;
   line-height: 3rem;
   text-align: center;
-  &.full {
-    width: 100%;
-  }
-  &.success {
-    background-color: forestgreen;
-    color: white;
-  }
-  &:disabled {
-    background-color: darkgray;
-  }
 }
 label,
 input,

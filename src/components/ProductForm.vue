@@ -101,6 +101,7 @@ export default {
   background-color: white;
   z-index: 1000;
   width: 20rem;
+  // width: 20.75rem;
   display: block;
   padding: 1.5rem;
   border-radius: 0.5rem;
@@ -109,7 +110,7 @@ export default {
     0px 6px 10px rgba(0, 0, 0, 0.02);
   .form-field {
     margin-bottom: 1rem;
-    &:last-child {
+    &:nth-child(4) {
       margin-bottom: 1.5rem;
     }
   }
@@ -131,8 +132,8 @@ export default {
     width: 100%;
     font-weight: bold;
     border-radius: 10px;
-    height: 2.5rem;
-    line-height: 2.5rem;
+    height: 2.25rem;
+    line-height: 2.25rem;
   }
   .add-btn:disabled {
     background-color: #eeeeee;
