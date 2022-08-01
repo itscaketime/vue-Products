@@ -18,7 +18,11 @@
       <p class="product-desc">{{ product.desc }}</p>
       <div class="product-value">{{ product.price }} <span>руб.</span></div>
     </div>
-    <button v-show="isHover" class="btn del-product-btn" @click="$emit('remove-product')"></button>
+    <button
+      v-show="isHover"
+      class="btn del-product-btn"
+      @click="$emit('remove-product')"
+    ></button>
   </article>
 </template>
 
@@ -63,7 +67,7 @@ export default {
     margin-bottom: 2rem;
   }
   .product-desc {
-    margin-bottom: 0;
+    margin-bottom: 2rem;
     // min-height:6rem;
   }
   .product-value {

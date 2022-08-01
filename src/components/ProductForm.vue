@@ -31,7 +31,6 @@
         ></label
       >
       <input
-        required
         type="url"
         id="input-image"
         name="image"
@@ -45,7 +44,6 @@
         type="text"
         id="input-value"
         name="value"
-        required
         placeholder="Введите цену"
         v-model="productPrice"
       />
@@ -112,7 +110,7 @@ export default {
   .form-field {
     margin-bottom: 1rem;
     &:last-child {
-      margin-bottom: none;
+      margin-bottom: 1.5rem;
     }
   }
   .required {
@@ -123,7 +121,7 @@ export default {
       height: 4px;
       display: block;
       border-radius: 100%;
-      background-color: crimson;
+      background-color: #ff8484;
       position: absolute;
       right: -4px;
       top: -2px;
@@ -131,8 +129,17 @@ export default {
   }
   .add-btn {
     width: 100%;
+    font-weight: bold;
+    border-radius: 10px;
+    height: 2.5rem;
+    line-height: 2.5rem;
+  }
+  .add-btn:disabled {
+    background-color: #eeeeee;
+    color: #b4b4b4;
   }
   .err {
+    color: #ff8484;
   }
 }
 </style>

@@ -10,10 +10,10 @@
 }
 
 html {
-  font-size: 12pt;
+  font-size: 11pt;
   @media screen and (max-width: 736px) {
     & {
-      font-size: 13pt;
+      // font-size: 12pt;
     }
   }
 }
