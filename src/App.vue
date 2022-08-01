@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'assets/_base.scss';
+@import './assets/_base.scss';
 
 #app {
 }
