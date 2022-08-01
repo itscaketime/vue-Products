@@ -1,5 +1,9 @@
 <template>
-  <select name="products-filter" id="products-filter" @change="">
+  <select
+    name="products-filter"
+    id="products-filter"
+    @change="$emit('change', $event.target.value)"
+  >
     <option v-for="filter in filters" :value="filter.value" :key="filter.value">
       {{ filter.text }}
     </option>

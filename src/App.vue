@@ -3,11 +3,14 @@
     <Layout>
       <template #top>
         <h1 class="title">Добавление товара</h1>
-        <ProductFilter />
+        <ProductFilter @change="onFilterChange" />
       </template>
       <template #bottom>
         <ProductForm @submit="addProduct" />
-        <Products :products="products" @remove-product="removeProduct" />
+        <Products
+          :products="filteredProducts"
+          @remove-product="removeProduct"
+        />
       </template>
     </Layout>
   </div>
@@ -41,20 +44,37 @@ export default {
     const products = ref(
       Array.from({ length: 10 }, (_, idx) => genericItem(idx))
     );
-    // const filteredProducts = computed(()=> prdocuts);
+    const filteredProducts = computed(() =>
+      products.value.sort((a, b) => {
+        switch (filter.value) {
+          case '':
+            return a.id < b.id ? 0 : 1;
+          case 'name':
+            return a.name.localeCompare(b.name);
+          case 'price':
+            // return a.price < b.price ? 1 : 0
+            return a.price.localeCompare(b.price);
+          default:
+            return 0;
+        }
+      })
+    );
 
     const addProduct = (data) => {
-      // console.log(data);
       products.value.push(data);
     };
     const removeProduct = (id) => {
-      console.log('remove', id);
       products.value = products.value.filter((item) => item.id !== id);
+    };
+    const onFilterChange = (filterType) => {
+      filter.value = filterType ?? '';
     };
     return {
       products,
       addProduct,
       removeProduct,
+      onFilterChange,
+      filteredProducts,
     };
   },
 };
