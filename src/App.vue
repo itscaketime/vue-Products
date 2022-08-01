@@ -3,7 +3,7 @@
     <Layout>
       <template #top>
         <h1 class="title">Добавление товара</h1>
-        <ProductFilter @change="(filter, ev) => onFilterChange(filter, ev)" />
+        <ProductFilter @filter-change="onFilterChange" />
       </template>
       <template #bottom>
         <ProductForm @submit="addProduct" />
@@ -49,12 +49,12 @@ export default {
         // console.log(filter.value)
         switch (filter.value) {
           case '':
-            return a.id < b.id ? 1 : 0;
+            return a.id > b.id ? 1 : 0;
           case 'name':
-            return b.name.localeCompare(a.name);
+            return a.name.localeCompare(b.name);
           case 'price':
             // return a.price < b.price ? 1 : 0
-            return b.price.localeCompare(a.price);
+            return a.price.localeCompare(b.price);
           default:
             return 0;
         }
@@ -67,9 +67,10 @@ export default {
     const removeProduct = (id) => {
       products.value = products.value.filter((item) => item.id !== id);
     };
-    const onFilterChange = (filterType) => {
-      console.log(filterType);
-      filter.value = filterType ?? '';
+    const onFilterChange = (type) => {
+      // console.log(args);
+      // console.log(filterType);
+      filter.value = type ?? '';
     };
     return {
       products,

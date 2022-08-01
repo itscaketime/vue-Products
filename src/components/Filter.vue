@@ -2,7 +2,7 @@
   <select
     name="products-filter"
     id="products-filter"
-    @change="$emit('change', $event.target.value)"
+    @change="$emit('filter-change',$event.target.value)"
   >
     <option v-for="filter in filters" :value="filter.value" :key="filter.value">
       {{ filter.text }}
@@ -18,7 +18,8 @@ const FILTERS = [
 ];
 export default {
   name: 'ProdcutFilter',
-  setup(props, { emit }) {
+  emits:['filter-change'],
+  setup(props) {
     return {
       filters: FILTERS,
     };
