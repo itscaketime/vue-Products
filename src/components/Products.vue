@@ -1,12 +1,14 @@
 <template>
-  <div class="products">
+  <!-- <div class="products"> -->
+  <TransitionGroup  class="products" name="list" tag="div">
     <ProductCard
       v-for="product in products"
       :key="product.id"
       :product="product"
       @remove-product="$emit('remove-product', product.id)"
     />
-  </div>
+  </TransitionGroup>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -24,6 +26,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
 .products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -39,10 +49,10 @@ export default {
       grid-template-columns: repeat(1, 1fr);
     }
   }
-  // @media screen and (max-width: 736px) {
-  //   & {
-  //     margin-left: 0;
-  //   }
-  // }
+  @media screen and (max-width: 736px) {
+    & {
+      margin-left: 0;
+    }
+  }
 }
 </style>
