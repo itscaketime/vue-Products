@@ -88,13 +88,6 @@ export default {
     });
 
     const formSubmittable = () => {
-      console.log(
-        productNameValidated.value,
-        !nameErr.value,
-        !imageErr.value,
-        productPriceValidated.value,
-        !priceErr.value
-      );
       return (
         productNameValidated.value &&
         !nameErr.value &&
@@ -120,7 +113,6 @@ export default {
       }
     });
     watch(productPrice, (prevValue, newValue) => {
-      console.log(productPriceValidated.value);
       if (!productPrice.value) {
         priceErr.value = true;
       } else {
@@ -135,7 +127,6 @@ export default {
       }
 
       let item = ctx.emit('submit', {
-        id: 'item:' + Math.random() * 100,
         name: productName.value,
         desc: productDesc.value,
         image: productImage.value,

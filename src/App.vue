@@ -24,13 +24,24 @@ import Products from './components/Products.vue';
 import { ref, computed, reactive } from 'vue';
 const IMGAE_URL =
   'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80';
+
+function *idGenerator(start){
+  let id = start || 0;
+  while(true){
+    yield ++id;
+  }
+}
+const idIter = idGenerator();
+
 const genericItem = (idx) => ({
-  id: 'item:' + idx,
+  id: idIter.next().value,
   name: 'Наименование товара ' + (idx + 1),
   desc: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
   image: IMGAE_URL,
   price: 10000,
 });
+
+
 export default {
   name: 'App',
   components: {
@@ -40,7 +51,7 @@ export default {
     ProductFilter,
   },
   setup() {
-    const filter = ref('name');
+    const filter = ref('');
     const products = ref(
       Array.from({ length: 10 }, (_, idx) => genericItem(idx))
     );
@@ -48,19 +59,19 @@ export default {
       products.value.sort((a, b) => {
         switch (filter.value) {
           case '':
-            return a.id.toString().localeCompare(b.id.toString());
+            return a.id > b.id ? 1 : -1;
           case 'name':
             return a.name.localeCompare(b.name);
           case 'price':
-            return a.price < b.price ? 1 : -1;
-          // return a.price.localeCompare(b.price);
+            return a.price < b.price ? -1 : 1;
           default:
-            return 0;
+            return true;
         }
       })
     );
 
     const addProduct = (data) => {
+      data.id = idIter.next().value;
       products.value.push(data);
     };
     const removeProduct = (id) => {
