@@ -11,7 +11,6 @@
 
 <script>
 import ProductCard from './ProductCard.vue';
-import { ref } from 'vue';
 export default {
   name: 'Products',
   props: ['products'],
@@ -19,7 +18,7 @@ export default {
   components: {
     ProductCard,
   },
-  setup(props) {},
+  setup() {},
 };
 </script>
 

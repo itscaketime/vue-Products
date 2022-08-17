@@ -2,7 +2,7 @@
   <select
     name="products-filter"
     id="products-filter"
-    @change="$emit('filter-change',$event.target.value)"
+    @change="$emit('filter-change', $event.target.value)"
   >
     <option v-for="filter in filters" :value="filter.value" :key="filter.value">
       {{ filter.text }}
@@ -18,8 +18,8 @@ const FILTERS = [
 ];
 export default {
   name: 'ProdcutFilter',
-  emits:['filter-change'],
-  setup(props) {
+  emits: ['filter-change'],
+  setup() {
     return {
       filters: FILTERS,
     };
@@ -27,7 +27,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '../assets/_vars.scss';
+@import '../assets/_vars';
 #products-filter {
   color: $text-color-light;
   background-color: #fff;

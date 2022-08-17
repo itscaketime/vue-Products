@@ -1,33 +1,31 @@
 <template>
-  <div id="app">
-    <Layout>
-      <template #top>
-        <h1 class="title">Добавление товара</h1>
-        <ProductFilter @filter-change="onFilterChange" />
-      </template>
-      <template #bottom>
-        <ProductForm @submit="addProduct" />
-        <Products
-          :products="filteredProducts"
-          @remove-product="removeProduct"
-        />
-      </template>
-    </Layout>
-  </div>
+  <!-- <div id="app"> -->
+  <Layout>
+    <template #top>
+      <h1 class="title">Добавление товара</h1>
+      <ProductFilter @filter-change="onFilterChange" />
+    </template>
+    <template #bottom>
+      <ProductForm @submit="addProduct" />
+      <Products :products="filteredProducts" @remove-product="removeProduct" />
+    </template>
+  </Layout>
+  <!-- </div> -->
 </template>
 
 <script>
+import { ref, computed } from 'vue';
 import ProductFilter from './components/Filter.vue';
 import Layout from './components/Layout.vue';
 import ProductForm from './components/ProductForm.vue';
 import Products from './components/Products.vue';
-import { ref, computed, reactive } from 'vue';
+
 const IMGAE_URL =
   'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80';
 
-function *idGenerator(start){
+function* idGenerator(start) {
   let id = start || 0;
-  while(true){
+  while (true) {
     yield ++id;
   }
 }
@@ -40,7 +38,6 @@ const genericItem = (idx) => ({
   image: IMGAE_URL,
   price: 10000,
 });
-
 
 export default {
   name: 'App',
@@ -55,8 +52,8 @@ export default {
     const products = ref(
       Array.from({ length: 10 }, (_, idx) => genericItem(idx))
     );
-    const filteredProducts = computed(() =>
-      products.value.sort((a, b) => {
+    const filteredProducts = computed(() => {
+      return [...products.value].sort((a, b) => {
         switch (filter.value) {
           case '':
             return a.id > b.id ? 1 : -1;
@@ -67,8 +64,8 @@ export default {
           default:
             return true;
         }
-      })
-    );
+      });
+    });
 
     const addProduct = (data) => {
       data.id = idIter.next().value;
@@ -92,11 +89,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import './assets/_base.scss';
-
-#app {
-}
+<style lang="scss">
+@import 'assets/_base';
 .title {
   font-size: 1.75rem;
   white-space: nowrap;

@@ -1,4 +1,5 @@
-const { createApp } = require('vue');
-import App from "./App.vue";
+import { createApp } from 'vue';
 
-createApp(App).mount("#root");
+import App from './App.vue';
+
+createApp(App).mount('#root');
