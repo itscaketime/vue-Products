@@ -1,5 +1,4 @@
 <template>
-  <!-- <div id="app"> -->
   <Layout>
     <template #top>
       <h1 class="title">Добавление товара</h1>
@@ -10,7 +9,6 @@
       <Products :products="filteredProducts" @remove-product="removeProduct" />
     </template>
   </Layout>
-  <!-- </div> -->
 </template>
 
 <script>
