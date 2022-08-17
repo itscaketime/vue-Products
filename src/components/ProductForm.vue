@@ -98,35 +98,35 @@ export default {
     };
 
     //make watcher hook
-    watch(productName, (prevValue, newValue) => {
+    watch(productName, () => {
       if (!productName.value) {
         nameErr.value = true;
       } else {
         nameErr.value = false;
       }
     });
-    watch(productImage, (prevValue, newValue) => {
+    watch(productImage, () => {
       if (!productImage.value) {
         imageErr.value = true;
       } else {
         imageErr.value = false;
       }
     });
-    watch(productPrice, (prevValue, newValue) => {
+    watch(productPrice, () => {
       if (!productPrice.value) {
         priceErr.value = true;
       } else {
         priceErr.value = false;
       }
     });
-    const onFormSubmit = (ev) => {
+    const onFormSubmit = () => {
       if (!formSubmittable()) {
         console.log('Form cannot be submited');
         //show some validation errs
         return;
       }
 
-      let item = ctx.emit('submit', {
+      ctx.emit('submit', {
         name: productName.value,
         desc: productDesc.value,
         image: productImage.value,
@@ -141,7 +141,6 @@ export default {
       productPrice,
       onFormSubmit,
       productNameValidated,
-      productNameValidated,
       nameErr,
       priceErr,
       imageErr,
@@ -152,7 +151,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/_vars.scss';
+@import '../assets/_vars';
+//?
+@import '../assets/_base';
 #product-form {
   background-color: white;
   z-index: 1000;

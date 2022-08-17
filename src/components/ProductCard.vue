@@ -33,7 +33,7 @@ export default {
   props: ['product'],
   emits: ['remove-product'],
   components: {},
-  setup(props, { emit }) {
+  setup(props) {
     const isHover = ref(false);
     const formatedPrice = computed(() => {
       return props.product?.price.toLocaleString().split(',').join(' ');
